@@ -1,0 +1,89 @@
+{
+	"name": "open-in-browser",
+	"displayName": "Open in Browser",
+	"description": "Extension for opening HTML files in your default browser.",
+	"icon": "assets/icon.png",
+	"version": "0.0.1",
+	"publisher": "Marton Megyeri",
+	"author": {
+		"name": "Marton Megyeri"
+	},
+	"engines": {
+		"vscode": "^1.41.0"
+	},
+	"keywords": [
+		"vscode",
+		"vsc",
+		"extension",
+		"open",
+		"launch",
+		"browser",
+		"localhost"
+	],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.openInBrowser"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.openInBrowser",
+				"title": "Open in Browser"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"when": "resourceLangId == html",
+					"command": "extension.openInBrowser",
+					"group": "navigation"
+				}
+			],
+			"editor/context": [
+				{
+					"when": "resourceLangId == html",
+					"command": "extension.openInBrowser",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "Open HTML files in browser",
+			"properties": {
+				"open-in-browser.relativeBase": {
+					"type": "string",
+					"default": "",
+					"markdownDescription": "Custom url base (without file name) to open in browser",
+					"scope": "window"
+				},
+				"open-in-browser.relativeBaseCutFolders": {
+					"type": "number",
+					"default": "",
+					"markdownDescription": "Cut folders from the start of the relative file path. Eg. with the option of 1, `/path/to/index.html` will become `/to/index.html`",
+					"scope": "window"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.41.0",
+		"eslint": "^6.6.0",
+		"glob": "^7.1.5",
+		"mocha": "^6.2.2",
+		"typescript": "^3.6.4",
+		"vscode-test": "^1.2.2"
+	},
+	"dependencies": {
+		"open": "^7.0.0"
+	}
+}
